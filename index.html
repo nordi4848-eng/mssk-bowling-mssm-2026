@@ -302,6 +302,69 @@ body{
  .user-identity-chip{top:auto;bottom:77px;right:7px;max-width:180px}
 }
 
+
+/* ===== PREMIUM CHAT V2 ===== */
+.premium-chat-page{background:linear-gradient(rgba(246,249,255,.92),rgba(246,249,255,.92))!important}
+.chat-hero-card{
+  display:flex;align-items:center;gap:12px;padding:14px 15px;border-radius:18px;
+  background:linear-gradient(135deg,#062e7e,#0b61de);color:#fff;border:1px solid rgba(255,255,255,.18);
+  box-shadow:0 9px 22px rgba(5,44,118,.16);margin-bottom:12px
+}
+.chat-hero-icon{width:48px;height:48px;border-radius:15px;background:linear-gradient(145deg,#ffd74a,#efaa0e);display:flex;align-items:center;justify-content:center;font-size:26px;box-shadow:0 5px 14px rgba(0,0,0,.18)}
+.chat-hero-card b{display:block;font-size:16px;letter-spacing:.3px}.chat-hero-card small{display:block;margin-top:3px;color:#dce8ff;font-size:10.5px}
+.chat-room-strip{display:flex;gap:8px;overflow-x:auto;padding:2px 0 11px;scrollbar-width:none}
+.chat-room-strip::-webkit-scrollbar{display:none}
+.room-chip{
+  flex:0 0 68px;height:66px;border:1px solid #cbd9ee;border-radius:17px;background:#fff;color:#0a3d91;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;font-size:21px;font-weight:950;
+  box-shadow:0 5px 13px rgba(5,44,110,.08)
+}
+.room-chip span{font-size:9px;font-weight:900}.room-chip.on{background:linear-gradient(145deg,#0b62df,#062f7d);color:#fff;border-color:#0b56c8}
+.premium-chat-card{background:#fff;border:1px solid #cedcf0;border-radius:21px;padding:12px;box-shadow:0 10px 26px rgba(5,43,108,.11)}
+.chat-card-top{display:flex;align-items:end;gap:9px;padding-bottom:10px;border-bottom:1px solid #e1e8f3}
+.chat-card-top>div:first-child{flex:1}.chat-card-top label{display:block;font-size:9px;font-weight:900;color:#66758c;margin-bottom:4px}
+.chat-card-top select{width:100%;padding:10px 11px;border:1px solid #c9d8ec;border-radius:12px;background:#f8fbff;color:#17356f;font-weight:900}
+.chat-actions{display:flex;gap:6px}.round-action{width:40px;height:40px;border-radius:50%;border:0;background:#edf4ff;font-size:18px}
+.premium-chat-log{
+  min-height:300px;max-height:430px;overflow-y:auto;margin:10px 0;padding:10px;
+  background:
+   linear-gradient(rgba(244,248,255,.90),rgba(244,248,255,.90)),
+   url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Cg fill='none' stroke='%230b55b8' stroke-width='1.2' opacity='.16'%3E%3Cpath d='M50 8c11 14 11 28 0 42-11-14-11-28 0-42ZM8 50c14-11 28-11 42 0-14 11-28 11-42 0ZM92 50c-14-11-28-11-42 0 14 11 28 11 42 0ZM50 92c11-14 11-28 0-42-11 14-11 28 0 42Z'/%3E%3C/g%3E%3C/svg%3E");
+  border-radius:16px;border:1px solid #dce6f4
+}
+.premium-chat-log .bubble{
+  max-width:82%;width:max-content;background:#fff;border-radius:15px 15px 15px 4px;padding:9px 11px;margin:7px 0;
+  box-shadow:0 3px 9px rgba(5,43,108,.07);border:1px solid #e0e8f4;font-size:12px
+}
+.premium-chat-log .bubble.me{margin-left:auto;background:#dceaff;border-radius:15px 15px 4px 15px;border-color:#c4d9f6}
+.chat-compose{display:grid;grid-template-columns:1fr 45px;gap:8px;align-items:end}
+.chat-compose textarea{resize:none;min-height:44px;max-height:90px;border:1px solid #cad9ed;border-radius:18px;padding:12px 14px;font:inherit;background:#f8fbff}
+.send-round{width:45px;height:45px;border-radius:50%;border:0;background:linear-gradient(145deg,#0d65e4,#06327f);color:#fff;font-size:21px;box-shadow:0 6px 14px rgba(7,55,136,.24)}
+.chat-name-hidden{display:none!important}.chat-compose-note{text-align:right;font-size:9px;color:#7a879b;margin-top:5px}
+
+/* ===== WORKING ADMIN PANEL ===== */
+.admin-manager-panel{
+  margin:12px 0 90px;background:#fff;border:2px solid #f1c334;border-radius:19px;padding:12px;
+  box-shadow:0 12px 28px rgba(4,39,103,.15)
+}
+.admin-manager-panel.hidden{display:none!important}
+.admin-panel-head{display:flex;align-items:center;justify-content:space-between;gap:10px;background:linear-gradient(135deg,#062e7d,#0a55c7);color:#fff;border-radius:14px;padding:11px 12px}
+.admin-panel-head b{display:block;font-size:15px}.admin-panel-head small{display:block;color:#dce8ff;font-size:9.5px;margin-top:2px}
+.admin-panel-head button{border:0;background:rgba(255,255,255,.15);color:#fff;width:34px;height:34px;border-radius:10px}
+.admin-panel-tools{display:grid;grid-template-columns:1fr auto;gap:7px;margin:10px 0}
+.admin-panel-tools input{min-width:0;padding:10px;border:1px solid #cedbee;border-radius:11px}
+.admin-users-list{display:grid;gap:8px;max-height:520px;overflow:auto}
+.admin-user-row{display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center;padding:10px;border:1px solid #d8e3f1;border-radius:13px;background:#f9fbff}
+.admin-user-row b{display:block;color:#112d68;font-size:12px}.admin-user-row small{display:block;color:#758198;font-size:9.5px;margin-top:2px}
+.admin-user-actions{display:flex;gap:5px;align-items:center}
+.admin-user-actions select{max-width:125px;padding:7px;border:1px solid #ccd9eb;border-radius:9px;font-size:10px;background:#fff}
+.admin-user-actions button{border:0;border-radius:9px;padding:8px;background:#eaf2ff;color:#0a4db1;font-weight:900}
+.admin-user-actions button.danger{background:#ffe9ed;color:#b61d39}
+@media(max-width:560px){
+ .premium-chat-log{min-height:330px}
+ .admin-user-row{grid-template-columns:1fr}.admin-user-actions{justify-content:space-between}.admin-user-actions select{flex:1;max-width:none}
+}
+
 </style></head><body>
 
 <div id="firstLoginOverlay" class="first-login-overlay">
@@ -381,10 +444,47 @@ body{
 <div class="lock-toolbar"><div class="lock-card"><b>📷 GALERI KONTINJEN</b><div class="meta">Latihan • Pertandingan • Kontinjen • Penyampaian Hadiah</div></div><div class="lock-card lock-admin">🔒 ADMIN / PEGAWAI<br>＋ Upload Gambar</div></div>
 <div class="lock-pills"><span class="lock-pill on">SEMUA</span><span class="lock-pill">LATIHAN</span><span class="lock-pill">PERTANDINGAN</span><span class="lock-pill">KONTINJEN</span><span class="lock-pill">PENYAMPAIAN</span></div>
 <div class="card form adminbox"><label>Nama uploader</label><input id="galUploader" value="Admin"><label class="btn primary">＋ Upload Gambar<input id="galFile" type="file" accept="image/*" multiple hidden></label></div><div class="gallery" id="galGrid"></div></div></section>
-<section id="chat" class="view"><div class="top"><button data-go="home">←</button><h2>SEMBANG</h2><span style="margin-left:auto;font-size:25px">💬</span></div><div class="content">
-<div class="notice">👥 Komunikasi untuk Pegawai, Atlet, Parents/Penjaga, keluarga dan pengguna yang diberi akses.</div>
-<div class="chat-rooms"><div class="chat-room">👥 Kontinjen MSSK<small>Semua pegawai & atlet</small></div><div class="chat-room">12 Kumpulan U12<small>Pegawai, atlet & parents</small></div><div class="chat-room">15 Kumpulan U15<small>Pegawai, atlet & parents</small></div><div class="chat-room">18 Kumpulan U18<small>Pegawai, atlet & parents</small></div><div class="chat-room">🎳 Pegawai Pasukan<small>Pegawai sahaja</small></div><div class="chat-room">👨‍👩‍👧 Parents / Penjaga<small>Ibu bapa & penjaga atlet</small></div><div class="chat-room">🌐 Ruang Terbuka<small>Sesiapa yang diberi akses</small></div><div class="chat-room">＋ Cipta Kumpulan<small>Tambah pengguna melalui jemputan</small></div></div>
-<div class="card"><div style="display:flex;justify-content:space-between;align-items:center;gap:8px"><select id="chatRoom" style="flex:1"><option>Kontinjen MSSK</option><option>Kumpulan U12</option><option>Kumpulan U15</option><option>Kumpulan U18</option><option>Pegawai Pasukan</option><option>Parents / Penjaga</option><option>Ruang Terbuka</option></select><div><button class="btn" id="voiceCall">📞</button> <button class="btn" id="videoCall">📹</button></div></div><div id="chatLog" style="min-height:220px;margin:12px 0"></div><div class="form"><input id="chatName" placeholder="Nama" value="Admin"><textarea id="chatMsg" rows="2" placeholder="Tulis mesej..."></textarea><button class="btn primary" id="sendMsg">➤ Hantar</button></div></div></div></section>
+<section id="chat" class="view">
+<div class="top"><button data-go="home">←</button><h2>SEMBANG</h2><span style="margin-left:auto;font-size:25px">💬</span></div>
+<div class="content premium-chat-page">
+  <div class="chat-hero-card">
+    <div class="chat-hero-icon">💬</div>
+    <div><b>SEMBANG KONTINJEN</b><small>Komunikasi rasmi & santai ahli kontinjen MSSK</small></div>
+  </div>
+
+  <div class="chat-room-strip">
+    <button class="room-chip on" data-room-name="Kontinjen MSSK">👥<span>Kontinjen</span></button>
+    <button class="room-chip" data-room-name="Kumpulan U12">12<span>U12</span></button>
+    <button class="room-chip" data-room-name="Kumpulan U15">15<span>U15</span></button>
+    <button class="room-chip" data-room-name="Kumpulan U18">18<span>U18</span></button>
+    <button class="room-chip" data-room-name="Pegawai Pasukan">🎳<span>Pegawai</span></button>
+    <button class="room-chip" data-room-name="Parents / Penjaga">👨‍👩‍👧<span>Parent</span></button>
+    <button class="room-chip" data-room-name="Ruang Terbuka">🌐<span>Umum</span></button>
+  </div>
+
+  <div class="premium-chat-card">
+    <div class="chat-card-top">
+      <div>
+        <label>Ruang Sembang</label>
+        <select id="chatRoom">
+          <option>Kontinjen MSSK</option><option>Kumpulan U12</option><option>Kumpulan U15</option><option>Kumpulan U18</option>
+          <option>Pegawai Pasukan</option><option>Parents / Penjaga</option><option>Ruang Terbuka</option>
+        </select>
+      </div>
+      <div class="chat-actions"><button class="round-action" id="voiceCall">📞</button><button class="round-action" id="videoCall">📹</button></div>
+    </div>
+
+    <div id="chatLog" class="premium-chat-log"></div>
+
+    <div class="chat-compose">
+      <input id="chatName" class="chat-name-hidden" placeholder="Nama" value="Admin" readonly>
+      <textarea id="chatMsg" rows="1" placeholder="Tulis mesej..."></textarea>
+      <button class="send-round" id="sendMsg">➤</button>
+    </div>
+    <div class="chat-compose-note">Nama penghantar ikut pendaftaran telefon.</div>
+  </div>
+</div>
+</section>
 <section id="set" class="view"><div class="top"><button data-go="home">←</button><h2>TETAPAN</h2><span style="margin-left:auto;font-size:25px">⚙️</span></div><div class="content">
 <div class="lock-card"><b>👤 Profil Pengguna</b><div class="meta">Nama, gambar profil & peranan pengguna</div><div class="form" style="margin-top:10px"><input id="displayName" value="" placeholder="Nama pengguna" readonly><select id="userRole" disabled><option>Belum didaftarkan</option></select><input id="userPin" inputmode="numeric" maxlength="4" placeholder="PIN 4 digit"><label><input id="notifyToggle" type="checkbox" checked> Aktifkan notifikasi</label><button class="btn primary" id="saveSettings">Simpan Tetapan</button><div class="meta" id="settingsStatus"></div></div></div>
 <div class="settings-grid">
@@ -394,7 +494,26 @@ body{
 <div class="setting-card"><b>🔄 Segarkan Data</b><small>Muat semula data terkini aplikasi</small></div>
 <div class="setting-card"><b>🆘 Bantuan & Sokongan</b><small>Hubungi Admin aplikasi</small></div>
 <div class="setting-card"><b>📄 Terma & Privasi</b><small>Maklumat penggunaan aplikasi</small></div></div>
-<div class="card adminbox" style="margin-top:12px"><b>🔒 TETAPAN ADMIN</b><div class="grid2" style="margin-top:10px"><button class="btn primary">👥 Urus Pengguna</button><button class="btn primary">🔐 Urus Akses</button></div><button class="btn" style="margin-top:8px">💾 Backup Data</button></div>
+<div class="card adminbox" id="adminSettingsBox" style="margin-top:12px">
+  <b>🔒 TETAPAN ADMIN</b>
+  <div class="grid2" style="margin-top:10px">
+    <button class="btn primary" id="adminUsersBtn">👥 Urus Pengguna</button>
+    <button class="btn primary" id="adminAccessBtn">🔐 Urus Akses</button>
+  </div>
+  <button class="btn" id="adminBackupBtn" style="margin-top:8px">💾 Backup Data</button>
+  <div id="adminActionStatus" class="meta" style="margin-top:8px"></div>
+</div>
+<div id="adminManagerPanel" class="admin-manager-panel hidden">
+  <div class="admin-panel-head">
+    <div><b id="adminPanelTitle">Urus Pengguna</b><small>Pengurusan peranti & peranan pengguna</small></div>
+    <button id="closeAdminPanel">✕</button>
+  </div>
+  <div class="admin-panel-tools">
+    <input id="adminUserSearch" placeholder="Cari nama / peranan...">
+    <button class="btn" id="refreshAdminUsers">↻ Segar</button>
+  </div>
+  <div id="adminUsersList" class="admin-users-list"></div>
+</div>
 <div class="credit"><b>Admin</b><br>Mohd Nordi bin Mohd Daud<br>Setiausaha Boling Tenpin MSSK</div></div></section>
 </main><nav class="nav"><div class="navin">
 <button data-go="home"><b>🏠</b><span>Utama</span></button>
@@ -651,6 +770,106 @@ document.addEventListener('DOMContentLoaded',()=>{
  const ath=document.getElementById('athList'); if(ath)obs.observe(ath,{childList:true,subtree:true});
  const score=document.getElementById('scoreArea'); if(score)obs.observe(score,{childList:true,subtree:true});
  restore();
+});
+})();
+</script>
+
+
+<script>
+(function(){
+const ROLE_NAMES={coordinator:'Penyelaras',technical_chair:'Pengerusi Teknik',manager:'Pengurus',coach:'Jurulatih',athlete:'Atlet',parent:'Parent',general:'Umum'};
+const ADMIN_KEY='manager:mohd-nordi';
+
+function isPrimaryAdmin(){ return window.APP_USER?.identity_key===ADMIN_KEY; }
+async function adminRpc(name,args={}){
+  const tok=localStorage.getItem('mssk_device_token');
+  const r=await fetch(`https://uiwqfdwwjqvqpdyzcgzc.supabase.co/rest/v1/rpc/${name}`,{
+    method:'POST',
+    headers:{'apikey':'sb_publishable_TETZ8AdYYxjkU-ea_94P3A_iS9PD3cx','Authorization':'Bearer sb_publishable_TETZ8AdYYxjkU-ea_94P3A_iS9PD3cx','Content-Type':'application/json'},
+    body:JSON.stringify({p_device_token:tok,...args})
+  });
+  const text=await r.text();
+  if(!r.ok) throw new Error(text||'Gagal');
+  return text?JSON.parse(text):null;
+}
+function setAdminStatus(s){const e=document.getElementById('adminActionStatus');if(e)e.textContent=s||''}
+async function loadAdminUsers(){
+  const list=document.getElementById('adminUsersList'); if(!list)return;
+  list.innerHTML='<div class="notice">Memuat pengguna...</div>';
+  try{
+    const rows=await adminRpc('admin_list_registrations');
+    window.ADMIN_ROWS=Array.isArray(rows)?rows:[];
+    renderAdminRows();
+  }catch(e){list.innerHTML='<div class="notice">🔒 Fungsi ini hanya untuk Admin utama.</div>'}
+}
+function renderAdminRows(){
+  const q=(document.getElementById('adminUserSearch')?.value||'').toLowerCase();
+  const list=document.getElementById('adminUsersList'); if(!list)return;
+  const rows=(window.ADMIN_ROWS||[]).filter(x=>`${x.display_name} ${x.role} ${x.identity_key}`.toLowerCase().includes(q));
+  list.innerHTML=rows.length?rows.map(x=>{
+    const primary=x.identity_key===ADMIN_KEY;
+    return `<div class="admin-user-row">
+      <div><b>${escAdmin(x.display_name)}</b><small>${ROLE_NAMES[x.role]||x.role} • ${new Date(x.registered_at).toLocaleString('ms-MY')}</small></div>
+      <div class="admin-user-actions">
+        <select data-role-key="${escAdmin(x.identity_key)}" ${primary?'disabled':''}>
+          ${Object.entries(ROLE_NAMES).map(([k,v])=>`<option value="${k}" ${k===x.role?'selected':''}>${v}</option>`).join('')}
+        </select>
+        <button data-save-role="${escAdmin(x.identity_key)}" ${primary?'disabled':''}>Simpan</button>
+        <button class="danger" data-reset-user="${escAdmin(x.identity_key)}" ${primary?'disabled':''}>Reset</button>
+      </div>
+    </div>`;
+  }).join(''):'<div class="notice">Tiada pengguna.</div>';
+  list.querySelectorAll('[data-save-role]').forEach(b=>b.onclick=async()=>{
+    const key=b.dataset.saveRole, sel=list.querySelector(`[data-role-key="${CSS.escape(key)}"]`);
+    try{await adminRpc('admin_set_role',{p_identity_key:key,p_role:sel.value});setAdminStatus('✅ Akses dikemaskini.');await loadAdminUsers()}catch(e){setAdminStatus('❌ Gagal kemas kini akses.')}
+  });
+  list.querySelectorAll('[data-reset-user]').forEach(b=>b.onclick=async()=>{
+    const key=b.dataset.resetUser;
+    if(!confirm('Reset pendaftaran telefon pengguna ini?'))return;
+    try{await adminRpc('admin_reset_identity',{p_identity_key:key});setAdminStatus('✅ Pendaftaran telefon direset.');await loadAdminUsers()}catch(e){setAdminStatus('❌ Gagal reset pengguna.')}
+  });
+}
+function escAdmin(s){return String(s||'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
+async function backupData(){
+  if(!isPrimaryAdmin()){setAdminStatus('🔒 Hanya Admin utama boleh backup data.');return}
+  setAdminStatus('Menyediakan backup...');
+  const tables=['athletes','officers','lane_assignments','game_scores','announcements','messages','rankings','ranking_sources','gallery_items','app_device_registrations'];
+  const out={created_at:new Date().toISOString(),app:'MSSK Bowling 2026',tables:{}};
+  for(const t of tables){
+    try{
+      if(t==='app_device_registrations') out.tables[t]=await adminRpc('admin_list_registrations');
+      else{
+        const r=await fetch(`https://uiwqfdwwjqvqpdyzcgzc.supabase.co/rest/v1/${t}?select=*`,{headers:{'apikey':'sb_publishable_TETZ8AdYYxjkU-ea_94P3A_iS9PD3cx','Authorization':'Bearer sb_publishable_TETZ8AdYYxjkU-ea_94P3A_iS9PD3cx'}});
+        out.tables[t]=r.ok?await r.json():[];
+      }
+    }catch(e){out.tables[t]=[]}
+  }
+  const blob=new Blob([JSON.stringify(out,null,2)],{type:'application/json'});
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=`MSSK_BOWLING_BACKUP_${new Date().toISOString().slice(0,10)}.json`;a.click();URL.revokeObjectURL(a.href);
+  setAdminStatus('✅ Backup berjaya dimuat turun.');
+}
+function syncAdminVisibility(){
+  const box=document.getElementById('adminSettingsBox');
+  if(box) box.style.display=isPrimaryAdmin()?'':'none';
+}
+document.addEventListener('DOMContentLoaded',()=>{
+  document.getElementById('adminUsersBtn')?.addEventListener('click',()=>{document.getElementById('adminManagerPanel')?.classList.remove('hidden');document.getElementById('adminPanelTitle').textContent='Urus Pengguna';loadAdminUsers()});
+  document.getElementById('adminAccessBtn')?.addEventListener('click',()=>{document.getElementById('adminManagerPanel')?.classList.remove('hidden');document.getElementById('adminPanelTitle').textContent='Urus Akses';loadAdminUsers()});
+  document.getElementById('adminBackupBtn')?.addEventListener('click',backupData);
+  document.getElementById('closeAdminPanel')?.addEventListener('click',()=>document.getElementById('adminManagerPanel')?.classList.add('hidden'));
+  document.getElementById('refreshAdminUsers')?.addEventListener('click',loadAdminUsers);
+  document.getElementById('adminUserSearch')?.addEventListener('input',renderAdminRows);
+
+  document.querySelectorAll('.room-chip').forEach(b=>b.onclick=()=>{
+    document.querySelectorAll('.room-chip').forEach(x=>x.classList.remove('on'));b.classList.add('on');
+    const room=document.getElementById('chatRoom');if(room){room.value=b.dataset.roomName;room.dispatchEvent(new Event('change'))}
+  });
+  document.getElementById('chatRoom')?.addEventListener('change',e=>{
+    document.querySelectorAll('.room-chip').forEach(x=>x.classList.toggle('on',x.dataset.roomName===e.target.value));
+  });
+
+  const identityWatch=setInterval(()=>{if(window.APP_USER){syncAdminVisibility();clearInterval(identityWatch)}},250);
+  setTimeout(syncAdminVisibility,1200);
 });
 })();
 </script>
