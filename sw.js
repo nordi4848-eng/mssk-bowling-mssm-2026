@@ -1,4 +1,4 @@
-const CACHE_NAME = 'mssk-bowling-2026-v5.6';
+const CACHE_NAME = 'mssk-bowling-2026-v5-7';
 const CORE = [
   './',
   './index.html',
@@ -30,10 +30,12 @@ self.addEventListener('fetch', event => {
     return;
   }
 
-  // Network-first for app pages so installed users receive updates without reinstalling.
-  if (req.mode === 'navigate' || req.url.endsWith('/index.html') || req.url.endsWith('/')) {
-    event.respondWith(fetch(req).then(resp => { const copy=resp.clone(); caches.open(CACHE_NAME).then(c=>c.put(req,copy)); return resp; }).catch(()=>caches.match(req).then(x=>x||caches.match('./index.html'))));
-    return;
-  }
-  event.respondWith(caches.match(req).then(cached => cached || fetch(req).then(resp => { const copy=resp.clone(); caches.open(CACHE_NAME).then(cache => cache.put(req, copy)); return resp; })));
+  // Cache-first for local static files.
+  event.respondWith(
+    caches.match(req).then(cached => cached || fetch(req).then(resp => {
+      const copy = resp.clone();
+      caches.open(CACHE_NAME).then(cache => cache.put(req, copy));
+      return resp;
+    }).catch(() => caches.match('./index.html')))
+  );
 });

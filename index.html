@@ -392,7 +392,7 @@ body{
     <div class="login-brand">🎳</div>
     <div class="login-kicker">KONTINJEN BOLING TENPIN MSSK 2026</div>
     <h1>Pendaftaran Telefon</h1>
-    <p class="login-sub">Pilih kategori dan nama anda. <b>Satu nama hanya boleh didaftarkan pada satu telefon.</b></p>
+    <p class="login-sub">Pilih kategori dan nama anda. <b>Pengguna biasa: satu nama satu telefon.</b> Admin boleh akses mana-mana telefon menggunakan PIN.</p>
 
     <div class="login-role-tabs" id="loginRoleTabs">
       <button data-reg-group="Penyelaras">Penyelaras</button>
@@ -790,6 +790,23 @@ function renderGroup(group){
 }
 function escLogin(s){return String(s||'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));}
 async function claim(x){
+ // V5.7: Admin tidak terikat kepada satu telefon. Admin masuk menggunakan PIN khas.
+ if(x.key==='manager:mohd-nordi'){
+   const pin=prompt('Masukkan PIN ADMIN (6 digit):');
+   if(pin===null)return;
+   if(!/^\d{6}$/.test(pin)){setStatus('PIN Admin mesti 6 digit.');return;}
+   try{
+     const data=new TextEncoder().encode(pin);
+     const digest=await crypto.subtle.digest('SHA-256',data);
+     const hex=Array.from(new Uint8Array(digest)).map(b=>b.toString(16).padStart(2,'0')).join('');
+     if(hex!=='64a8830c174488e5de1fded0b7d39d4972b8535f20c6380a4b3b2ed041d5c982'){
+       setStatus('PIN Admin tidak betul.');return;
+     }
+     activate({ok:true,identity_key:'manager:mohd-nordi',display_name:'Mohd Nordi bin Mohd Daud',role:'manager'});
+     try{sessionStorage.setItem('mssk_admin_pin_session','1');}catch(e){}
+     return;
+   }catch(e){setStatus('Gagal mengesahkan PIN Admin.');return;}
+ }
  setStatus('Mendaftarkan telefon ini...');
  try{
    const res=await rpc('claim_app_identity',{p_identity_key:x.key,p_display_name:x.name,p_role:x.role,p_device_token:token()});
@@ -861,6 +878,7 @@ window.applyRolePermissions=function(){
  }
 };
 async function restore(){
+ try{if(sessionStorage.getItem('mssk_admin_pin_session')==='1'){activate({ok:true,identity_key:'manager:mohd-nordi',display_name:'Mohd Nordi bin Mohd Daud',role:'manager'});return;}}catch(e){}
  // V5.6: token peranti disimpan secara redundan (localStorage + cookie + IndexedDB).
  // Semasa kemas kini, cuba semua token lama yang masih wujud sebelum mencipta identiti baharu.
  const standalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
