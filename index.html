@@ -861,7 +861,7 @@ window.applyRolePermissions=function(){
  }
 };
 async function restore(){
- // V5.5: token peranti disimpan secara redundan (localStorage + cookie + IndexedDB).
+ // V5.6: token peranti disimpan secara redundan (localStorage + cookie + IndexedDB).
  // Semasa kemas kini, cuba semua token lama yang masih wujud sebelum mencipta identiti baharu.
  const standalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
  let candidates=await deviceTokenCandidates();
@@ -896,11 +896,30 @@ async function restore(){
 document.addEventListener('DOMContentLoaded',()=>{
  document.querySelectorAll('[data-reg-group]').forEach(b=>b.onclick=()=>renderGroup(b.dataset.regGroup));
  document.getElementById('registerGeneralBtn')?.addEventListener('click',claimGeneral);
- document.getElementById('deviceRecoveryBtn')?.addEventListener('click',()=>{
+ document.getElementById('deviceRecoveryBtn')?.addEventListener('click',async()=>{
    const rb=document.getElementById('deviceRecoveryBtn');
    const t=token();
    const out=document.getElementById('deviceRecoveryCode');
-   if(out){out.innerHTML='<b>Kod pemulihan peranti:</b><br>'+escLogin(t)+'<br><small>Hantar kod ini kepada Admin untuk memindahkan pendaftaran ke telefon ini. Data pengguna lain tidak dipadam.</small>';out.classList.remove('hidden');}
+   if(rb){rb.disabled=true;rb.textContent='Memulihkan akses...';}
+   try{
+     const recovered=await rpc('recover_authorized_app_identity',{p_device_token:t});
+     if(recovered?.ok){
+       persistDeviceToken(t);
+       if(out){out.innerHTML='<b style=\"color:#18723b\">✅ Akses berjaya dipulihkan.</b>';out.classList.remove('hidden');}
+       activate(recovered);
+       return;
+     }
+     if(out){
+       out.innerHTML='<b>Kod pemulihan peranti:</b><br>'+escLogin(t)+'<br><small>Kod ini belum disahkan. Hantar kod ini kepada Admin, kemudian tekan butang Pulihkan akses telefon ini sekali lagi selepas Admin mengesahkannya.</small>';
+       out.classList.remove('hidden');
+     }
+     setStatus('Kod pemulihan belum disahkan oleh Admin.');
+   }catch(e){
+     if(out){out.innerHTML='<b>Kod pemulihan peranti:</b><br>'+escLogin(t)+'<br><small>Gagal menghubungi server. Pastikan internet aktif dan cuba lagi.</small>';out.classList.remove('hidden');}
+     setStatus('Gagal memulihkan akses. Cuba lagi.');
+   }finally{
+     if(rb){rb.disabled=false;rb.textContent='Pulihkan akses telefon ini';}
+   }
  });
  // Mutation observers keep permission state after athlete/score dynamic render.
  const obs=new MutationObserver(()=>applyRolePermissions());
