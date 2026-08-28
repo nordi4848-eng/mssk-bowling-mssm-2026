@@ -804,7 +804,18 @@ window.applyRolePermissions=function(){
  }
 };
 async function restore(){
+ // Safari biasa dan PWA yang dipasang boleh mempunyai storan peranti berasingan pada iPhone.
+ // Jangan paksa pendaftaran semula: pengguna sedia ada perlu membuka ikon aplikasi di Home Screen.
+ const standalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
  const t=localStorage.getItem('mssk_device_token');
+ if(!t && !standalone){
+   const st=document.getElementById('loginStatus');
+   if(st){
+     st.innerHTML='📱 <b>Sudah pernah daftar?</b> Jika aplikasi telah dipasang, buka ikon MSSK Bowling dari Home Screen. Safari biasa dianggap sesi/peranti berasingan dan tidak perlu didaftarkan semula.';
+     st.style.color='#8a5a00';
+   }
+ }
+
  if(!t){renderGroup('Penyelaras');return;}
  try{
    const res=await rpc('get_app_identity',{p_device_token:t});
