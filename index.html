@@ -377,6 +377,12 @@ body{
 .home-contingent-photo .photo-frame{background:#061d57;border:3px solid #f4c52d;border-radius:18px;overflow:hidden;box-shadow:0 8px 24px rgba(4,23,74,.18)}
 .home-contingent-photo img{display:block;width:100%;height:auto;max-height:520px;object-fit:cover;object-position:center}
 .home-contingent-photo .caption{text-align:center;background:linear-gradient(145deg,#0b2f79,#061b52);color:#fff;font-weight:900;padding:10px 8px;letter-spacing:.3px}
+
+/* V5.7.3 — Bilik Atlet */
+.room-hero{background:linear-gradient(145deg,#09245f,#153f91);color:#fff;border:2px solid #e9bd38;border-radius:18px;padding:18px;text-align:center;margin-bottom:14px;box-shadow:0 8px 22px rgba(6,29,87,.14)}
+.room-hero .hotel{font-size:20px;font-weight:950;color:#ffd95b}.room-hero .sub{font-size:12px;opacity:.88;margin-top:5px}
+.room-section-title{font-weight:950;color:#09245f;font-size:18px;margin:18px 2px 9px;display:flex;align-items:center;gap:8px}
+.room-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.room-card{background:#fff;border:1px solid #d8e5f5;border-top:4px solid #e6b82d;border-radius:16px;padding:13px;box-shadow:0 4px 14px #e3ebf5}.room-card .room-no{font-size:12px;font-weight:900;color:#66748b;text-transform:uppercase}.room-card .room-code{font-size:27px;font-weight:950;color:#0b2e78;line-height:1.1;margin:2px 0 10px}.room-person{padding:7px 0;border-top:1px solid #edf1f6;font-weight:800;color:#1c315f}.room-person:first-of-type{border-top:0}@media(max-width:430px){.room-grid{grid-template-columns:1fr 1fr}.room-card{padding:11px}.room-card .room-code{font-size:24px}.room-person{font-size:13px}}
 </style>
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#063B98">
@@ -392,7 +398,7 @@ body{
     <div class="login-brand">🎳</div>
     <div class="login-kicker">KONTINJEN BOLING TENPIN MSSK 2026</div>
     <h1>Pendaftaran Telefon</h1>
-    <p class="login-sub">Pilih kategori dan nama anda. <b>Pengguna biasa: satu nama satu telefon.</b> Admin boleh akses mana-mana telefon menggunakan PIN.</p>
+    <p class="login-sub">Pilih kategori dan nama anda. <b>Akses bebas dari mana-mana telefon/peranti.</b> Hak mengisi skor hanya untuk pegawai yang dibenarkan dan Admin.</p>
 
     <div class="login-role-tabs" id="loginRoleTabs">
       <button data-reg-group="Penyelaras">Penyelaras</button>
@@ -409,12 +415,12 @@ body{
     <div id="generalRegistration" class="general-registration hidden">
       <label>Nama pengguna umum</label>
       <input id="generalName" maxlength="80" placeholder="Masukkan nama penuh">
-      <div class="login-help">Nama ini akan dipautkan kepada telefon ini.</div>
+      <div class="login-help">Anda boleh menggunakan nama ini pada mana-mana telefon/peranti.</div>
       <button class="login-register-btn" id="registerGeneralBtn">Daftar Sebagai Umum</button>
     </div>
 
     <div id="loginStatus" class="login-status"></div>
-    <button id="deviceRecoveryBtn" class="login-register-btn hidden" type="button" style="margin-top:10px">Pulihkan akses telefon ini</button>
+    <button id="deviceRecoveryBtn" class="login-register-btn hidden" type="button" style="display:none!important">Pulihkan akses telefon ini</button>
     <div id="deviceRecoveryCode" class="login-help hidden" style="margin-top:10px;word-break:break-all"></div>
     <div class="login-access">
       <b>Akses:</b> Penyelaras / Pengerusi Teknik / Pengurus boleh isi lane & skor • Jurulatih boleh isi skor • Atlet / Parent / Umum lihat data & chat.
@@ -468,6 +474,19 @@ body{
 <div class="lock-toolbar"><div class="lock-card"><b>📢 PAPAN PENGUMUMAN</b><div class="meta">Maklumat rasmi Kontinjen Boling Tenpin MSSK 2026</div></div><div class="lock-card lock-admin">🔒 ADMIN / PEGAWAI<br>＋ Buat Pengumuman</div></div>
 <div class="lock-pills"><span class="lock-pill on">SEMUA</span><span class="lock-pill">PENTING</span><span class="lock-pill">JADUAL</span><span class="lock-pill">LANE</span><span class="lock-pill">UMUM</span></div>
 <div class="card form adminbox"><b>📣 Admin / Pegawai</b><label>Tajuk</label><input id="annTitle"><label>Pengumuman</label><textarea id="annBody" rows="4"></textarea><button class="btn primary" id="publishAnn">Terbitkan</button></div><div id="annList"></div></div></section>
+<section id="room" class="view"><div class="top"><button data-go="home">←</button><h2>BILIK ATLET</h2><span style="margin-left:auto;font-size:25px">🏨</span></div><div class="content">
+<div class="room-hero"><div style="font-size:31px">🏨</div><div class="hotel">PENGINAPAN ATLET</div><div class="sub">Kontinjen Boling Tenpin MSSK 2026</div></div>
+<div class="room-section-title">👦 ATLET LELAKI</div><div class="room-grid">
+<div class="room-card"><div class="room-no">Bilik 1</div><div class="room-code">L208</div><div class="room-person">Ayie</div><div class="room-person">Aiman</div><div class="room-person">Azim</div></div>
+<div class="room-card"><div class="room-no">Bilik 2</div><div class="room-code">L210</div><div class="room-person">Alif</div><div class="room-person">Farhan</div><div class="room-person">Uzair</div></div>
+<div class="room-card"><div class="room-no">Bilik 3</div><div class="room-code">L201</div><div class="room-person">Hazieq</div><div class="room-person">Amsyar</div><div class="room-person">Fariehin</div></div>
+<div class="room-card"><div class="room-no">Bilik 4</div><div class="room-code">L202</div><div class="room-person">Dani</div><div class="room-person">Haziq</div><div class="room-person">Hakimi</div></div></div>
+<div class="room-section-title">👧 ATLET PEREMPUAN</div><div class="room-grid">
+<div class="room-card"><div class="room-no">Bilik 1</div><div class="room-code">L102</div><div class="room-person">Nurin Amani</div><div class="room-person">Puteri</div><div class="room-person">Nurin Haziqah</div></div>
+<div class="room-card"><div class="room-no">Bilik 2</div><div class="room-code">L101</div><div class="room-person">Athirah</div><div class="room-person">Arfa</div><div class="room-person">Aliya</div></div>
+<div class="room-card"><div class="room-no">Bilik 3</div><div class="room-code">L110</div><div class="room-person">Izzah</div><div class="room-person">Qaseh</div><div class="room-person">Ika</div></div>
+<div class="room-card"><div class="room-no">Bilik 4</div><div class="room-code">L111</div><div class="room-person">Qistina</div><div class="room-person">Farzana</div><div class="room-person">Irdina</div></div></div>
+<div class="all-info" style="margin-top:16px">ⓘ Sila rujuk nombor bilik yang ditetapkan sepanjang penginapan kontinjen.</div></div></section>
 <section id="gal" class="view"><div class="top"><button data-go="home">←</button><h2>GALERI</h2><span style="margin-left:auto;font-size:25px">📸</span></div><div class="content">
 <div class="lock-toolbar"><div class="lock-card"><b>📷 GALERI KONTINJEN</b><div class="meta">Latihan • Pertandingan • Kontinjen • Penyampaian Hadiah</div></div><div class="lock-card">📱 SEMUA AHLI<br>＋ Boleh Upload Gambar</div></div>
 <div class="lock-pills" id="galFilters"><span class="lock-pill gal-filter on" data-galcat="Semua">SEMUA</span><span class="lock-pill gal-filter" data-galcat="Latihan">LATIHAN</span><span class="lock-pill gal-filter" data-galcat="Pertandingan">PERTANDINGAN</span><span class="lock-pill gal-filter" data-galcat="Kontinjen">KONTINJEN</span><span class="lock-pill gal-filter" data-galcat="Penyampaian">PENYAMPAIAN</span></div>
@@ -510,7 +529,7 @@ body{
       <textarea id="chatMsg" rows="1" placeholder="Tulis mesej..."></textarea>
       <button class="send-round" id="sendMsg">➤</button>
     </div>
-    <div class="chat-compose-note">Nama penghantar ikut pendaftaran telefon.</div>
+    <div class="chat-compose-note">Nama penghantar ikut identiti yang dipilih.</div>
   </div>
 </div>
 </section>
@@ -556,6 +575,7 @@ body{
 <button data-go="ann"><b>📣</b><span>Pengumuman</span></button>
 <button data-go="gal"><b>🖼️</b><span>Galeri</span></button>
 <button data-go="chat"><b>💬</b><span>Sembang</span></button>
+<button data-go="room"><b>🏨</b><span>Bilik</span></button>
 <button data-go="set"><b>⚙️</b><span>Tetapan</span></button>
 </div></nav>
 <script>
@@ -662,7 +682,7 @@ function openGallery(i){if(!galItems.length)return;galIndex=(i+galItems.length)%
 galLightbox.querySelector('.lb-close').onclick=()=>galLightbox.classList.remove('on');galLightbox.querySelector('.lb-prev').onclick=e=>{e.stopPropagation();openGallery(galIndex-1)};galLightbox.querySelector('.lb-next').onclick=e=>{e.stopPropagation();openGallery(galIndex+1)};galLightbox.onclick=e=>{if(e.target===galLightbox)galLightbox.classList.remove('on')};
 async function deleteGallery(id,path){if(window.APP_USER?.identity_key!=='manager:mohd-nordi')return alert('Hanya Admin boleh padam gambar.');if(!confirm('Padam gambar ini?'))return;await fetch(`${SB_URL}/storage/v1/object/mssk-gallery/${encodeURIComponent(path)}`,{method:'DELETE',headers:{'apikey':SB_KEY,'Authorization':'Bearer '+SB_KEY}});await rest(`gallery_items?id=eq.${id}`,{method:'DELETE'});loadGallery()}
 let chatTimer=null;chatRoom.onchange=loadChat;sendMsg.onclick=async()=>{if(!chatMsg.value.trim())return;await rest('messages',{method:'POST',headers:{'Prefer':'return=minimal'},body:JSON.stringify({room:chatRoom.value,sender:chatName.value||'Pengguna',body:chatMsg.value.trim()})});chatMsg.value='';loadChat()};async function loadChat(){try{const r=await rest(`messages?select=*&room=eq.${encodeURIComponent(chatRoom.value)}&order=created_at.asc&limit=100`);chatLog.innerHTML=r.map(m=>`<div class="bubble ${m.sender===(chatName.value||'Pengguna')?'me':''}"><b>${esc(m.sender)}</b><br>${esc(m.body)}<div class="meta">${new Date(m.created_at).toLocaleTimeString('ms-MY',{hour:'2-digit',minute:'2-digit'})}</div></div>`).join('');chatLog.scrollTop=chatLog.scrollHeight}catch(e){}}videoCall.onclick=()=>open(`https://meet.jit.si/MSSKBowling2026-${encodeURIComponent(chatRoom.value.replace(/\s/g,''))}`,'_blank');voiceCall.onclick=()=>open(`https://meet.jit.si/MSSKBowling2026-${encodeURIComponent(chatRoom.value.replace(/\s/g,''))}#config.startWithVideoMuted=true`,'_blank');chatTimer=setInterval(()=>{if(document.getElementById('chat').classList.contains('on'))loadChat()},5000);
-saveSettings.onclick=async()=>{if(userPin.value&&!/^\d{4}$/.test(userPin.value)){settingsStatus.textContent='PIN mesti 4 digit';return}const v={display_name:displayName.value,role:userRole.value,pin:userPin.value,notifications:notifyToggle.checked};localStorage.setItem('mssk_settings',JSON.stringify(v));settingsStatus.textContent='✅ Tetapan disimpan pada telefon ini.'};try{const v=JSON.parse(localStorage.getItem('mssk_settings')||'{}');if(v.display_name)displayName.value=chatName.value=galUploader.value=v.display_name;if(v.role)userRole.value=v.role;if(v.pin)userPin.value=v.pin;if(typeof v.notifications==='boolean')notifyToggle.checked=v.notifications}catch(e){}
+saveSettings.onclick=async()=>{if(userPin.value&&!/^\d{4}$/.test(userPin.value)){settingsStatus.textContent='PIN mesti 4 digit';return}const v={display_name:displayName.value,role:userRole.value,pin:userPin.value,notifications:notifyToggle.checked};localStorage.setItem('mssk_settings',JSON.stringify(v));settingsStatus.textContent='✅ Tetapan disimpan pada peranti ini.'};try{const v=JSON.parse(localStorage.getItem('mssk_settings')||'{}');if(v.display_name)displayName.value=chatName.value=galUploader.value=v.display_name;if(v.role)userRole.value=v.role;if(v.pin)userPin.value=v.pin;if(typeof v.notifications==='boolean')notifyToggle.checked=v.notifications}catch(e){}
 renderSchedule();initData();
 </script>
 
@@ -799,7 +819,8 @@ function renderGroup(group){
 }
 function escLogin(s){return String(s||'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));}
 async function claim(x){
- // V5.7: Admin tidak terikat kepada satu telefon. Admin masuk menggunakan PIN khas.
+ // V5.7.4: Semua pengguna bebas akses dari mana-mana peranti.
+ // Admin kekal dilindungi PIN. Hak edit ditentukan oleh role dalam activate().
  if(x.key==='manager:mohd-nordi'){
    const pin=prompt('Masukkan PIN ADMIN (6 digit):');
    if(pin===null)return;
@@ -816,19 +837,10 @@ async function claim(x){
      return;
    }catch(e){setStatus('Gagal mengesahkan PIN Admin.');return;}
  }
- setStatus('Mendaftarkan telefon ini...');
- try{
-   const res=await rpc('claim_app_identity',{p_identity_key:x.key,p_display_name:x.name,p_role:x.role,p_device_token:token()});
-   if(!res?.ok){
-     setStatus(res?.message||'Nama ini tidak dapat didaftarkan.');
-     if(res?.code==='already_registered'){
-       const rb=document.getElementById('deviceRecoveryBtn');
-       if(rb){rb.dataset.identity=x.key;rb.dataset.name=x.name;rb.dataset.role=x.role;rb.classList.remove('hidden');}
-     }
-     return;
-   }
-   activate(res);
- }catch(e){setStatus('Gagal mendaftar. Pastikan internet aktif.');}
+ // Tiada lagi claim/lock satu telefon untuk pengguna biasa.
+ activate({ok:true,identity_key:x.key,display_name:x.name,role:x.role});
+ try{localStorage.setItem('mssk_free_identity',JSON.stringify({identity_key:x.key,display_name:x.name,role:x.role}));}catch(e){}
+ setStatus('Akses berjaya.',true);
 }
 async function claimGeneral(){
  const input=document.getElementById('generalName');
@@ -888,36 +900,14 @@ window.applyRolePermissions=function(){
 };
 async function restore(){
  try{if(sessionStorage.getItem('mssk_admin_pin_session')==='1'){activate({ok:true,identity_key:'manager:mohd-nordi',display_name:'Mohd Nordi bin Mohd Daud',role:'manager'});return;}}catch(e){}
- // V5.6: token peranti disimpan secara redundan (localStorage + cookie + IndexedDB).
- // Semasa kemas kini, cuba semua token lama yang masih wujud sebelum mencipta identiti baharu.
- const standalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
- let candidates=await deviceTokenCandidates();
-
- // Cuba pulihkan sesi daripada mana-mana salinan token yang masih sah di server.
- for(const t of candidates){
-   try{
-     const res=await rpc('get_app_identity',{p_device_token:t});
-     if(res?.ok){persistDeviceToken(t);activate(res);return;}
-   }catch(e){}
- }
-
- // Jika tiada token langsung, cipta satu dan simpan pada tiga storan.
- let current=candidates[0]||token();
- persistDeviceToken(current);
-
- // Pemulihan satu-kali yang telah dipra-kebenarkan oleh Admin/server.
+ // V5.7.4: pengguna biasa bebas peranti; pulihkan pilihan terakhir pada peranti ini sahaja.
  try{
-   const recovered=await rpc('recover_authorized_app_identity',{p_device_token:current});
-   if(recovered?.ok){persistDeviceToken(current);activate(recovered);return;}
- }catch(e){}
-
- if(!standalone){
-   const st=document.getElementById('loginStatus');
-   if(st){
-     st.innerHTML='📱 <b>Sudah pernah daftar?</b> Jika aplikasi telah dipasang, buka ikon MSSK Bowling dari Home Screen. Safari biasa boleh mempunyai storan berasingan.';
-     st.style.color='#8a5a00';
+   const saved=JSON.parse(localStorage.getItem('mssk_free_identity')||'null');
+   if(saved?.identity_key && saved.identity_key!=='manager:mohd-nordi'){
+     activate({ok:true,identity_key:saved.identity_key,display_name:saved.display_name,role:saved.role});
+     return;
    }
- }
+ }catch(e){}
  renderGroup('Penyelaras');
 }
 document.addEventListener('DOMContentLoaded',()=>{
