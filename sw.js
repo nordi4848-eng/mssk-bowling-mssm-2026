@@ -1,4 +1,4 @@
-const CACHE_NAME = 'mssk-bowling-2026-v5-3';
+const CACHE_NAME = 'mssk-bowling-2026-v5-4';
 const CORE = [
   './',
   './index.html',
