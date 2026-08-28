@@ -433,7 +433,7 @@ body{
     <div class="home-hotspots" aria-label="Menu utama">
       <button data-go="off"  aria-label="Senarai Pegawai"      style="left:4%;top:44.4%;width:22.4%;height:17.3%"></button>
       <button data-go="ath"  aria-label="Senarai Atlet"        style="left:27.1%;top:44.4%;width:22.4%;height:17.3%"></button>
-      <button data-go="sch"  aria-label="Jadual"               style="left:50.4%;top:44.4%;width:22.4%;height:17.3%"></button>
+      <button data-go="sch"  aria-label="Tentatif"               style="left:50.4%;top:44.4%;width:22.4%;height:17.3%"></button>
       <button data-go="lane" aria-label="Kedudukan Lane"       style="left:73.2%;top:44.4%;width:22.4%;height:17.3%"></button>
 
       <button data-go="score" aria-label="Live Score"          style="left:4%;top:62.1%;width:22.4%;height:16.4%"></button>
@@ -456,7 +456,7 @@ body{
 
 <section id="off" class="view"><div class="top"><button data-go="home">←</button><h2>Senarai Pegawai</h2></div><div class="content" id="offList"></div></section>
 <section id="ath" class="view"><div class="top"><button data-go="home">←</button><h2>Senarai Atlet + Isi Lane</h2></div><div class="content"><div class="notice">🎳 Selepas undian, pengurus masukkan nombor lane pada atlet di sini. Kedudukan keseluruhan dipaparkan di Page Kedudukan Lane.</div><div class="card form"><label>Acara Lane</label><select id="athLaneEvent"><option>Individu</option><option>Beregu</option><option>Master</option><option>Berpasukan</option></select></div><div class="tabs" id="catTabs"></div><div id="athList"></div><button class="btn primary" id="saveAthLane">💾 Simpan Lane</button><div class="status" id="athLaneStatus"></div></div></section>
-<section id="sch" class="view"><div class="top"><button data-go="home">←</button><h2>Jadual Pertandingan</h2></div><div class="content" id="schList"></div></section>
+<section id="sch" class="view"><div class="top"><button data-go="home">←</button><h2>Tentatif Program</h2></div><div class="content" id="schList"></div></section>
 <section id="lane" class="view"><div class="top"><button data-go="home">←</button><h2>Kedudukan Lane</h2></div><div class="content"><div class="notice">📍 Paparan automatik lane yang telah disimpan di Page Atlet. Pilih acara dan kategori.</div><div class="card form"><label>Acara</label><select id="laneViewEvent"><option>Individu</option><option>Beregu</option><option>Master</option><option value="Berpasukan">Team</option></select></div><div class="tabs" id="laneViewCats"></div><div id="laneViewList"></div></div></section>
 <section id="all" class="view"><div class="top"><button data-go="home">←</button><h2>ALL EVENT</h2><span style="margin-left:auto;font-size:25px">🎳</span></div><div class="content"><div class="all-head-note">Jumlah automatik = Individu + Beregu</div><div class="all-toolbar"><div class="card form"><label>KATEGORI</label><select id="allCat"></select></div><div class="card all-count"><div style="font-size:29px">👥</div><div><div class="small">JUMLAH ATLET</div><div class="num" id="allCount">4</div></div></div></div><div id="allList"></div><div class="all-info">ⓘ Skor akan dipaparkan selepas dimasukkan di menu Skor. Tiada input semula diperlukan.</div></div></section>
 <section id="score" class="view"><div class="top"><button data-go="home">←</button><h2>Live Score</h2></div><div class="content"><div class="card form"><label>Acara</label><select id="scoreEvent"><option>Individu</option><option>Beregu</option></select><label>Kategori</label><select id="scoreCat"></select><label>Atlet</label><select id="scorePlayer"></select><div id="partnerWrap" class="hidden"><label>Pasangan Beregu</label><select id="scorePartner"></select><button type="button" class="btn primary" id="savePair" style="margin-top:8px">👥 Sahkan Pasangan Beregu</button><div class="status" id="pairStatus"></div></div></div><div id="gameTabs" class="tabs"></div><div id="scoreArea"></div></div></section>
@@ -517,7 +517,7 @@ body{
 <section id="set" class="view"><div class="top"><button data-go="home">←</button><h2>TETAPAN</h2><span style="margin-left:auto;font-size:25px">⚙️</span></div><div class="content">
 <div class="lock-card"><b>👤 Profil Pengguna</b><div class="meta">Nama, gambar profil & peranan pengguna</div><div class="form" style="margin-top:10px"><input id="displayName" value="" placeholder="Nama pengguna" readonly><select id="userRole" disabled><option>Belum didaftarkan</option></select><input id="userPin" inputmode="numeric" maxlength="4" placeholder="PIN 4 digit"><label><input id="notifyToggle" type="checkbox" checked> Aktifkan notifikasi</label><button class="btn primary" id="saveSettings">Simpan Tetapan</button><div class="meta" id="settingsStatus"></div></div></div>
 <div class="settings-grid">
-<div class="setting-card"><b>🔔 Notifikasi</b><small>Pengumuman, jadual, lane, mesej & ranking</small></div>
+<div class="setting-card"><b>🔔 Notifikasi</b><small>Pengumuman, tentatif, lane, mesej & ranking</small></div>
 <div class="setting-card"><b>🎨 Paparan</b><small>Mod cerah/gelap, bahasa & saiz tulisan</small></div>
 <div class="setting-card"><b>🔐 Privasi & Keselamatan</b><small>Kata laluan, status, kamera & mikrofon</small></div>
 <div class="setting-card"><b>🔄 Segarkan Data</b><small>Muat semula data terkini aplikasi</small></div>
@@ -548,7 +548,7 @@ body{
 <button data-go="home"><b>🏠</b><span>Utama</span></button>
 <button data-go="off"><b>👥</b><span>Pegawai</span></button>
 <button data-go="ath"><b>👤</b><span>Atlet</span></button>
-<button data-go="sch"><b>📅</b><span>Jadual</span></button>
+<button data-go="sch"><b>📅</b><span>Tentatif</span></button>
 <button data-go="lane"><b>🎳</b><span>Lane</span></button>
 <button data-go="score"><b>🎯</b><span>Skor</span></button>
 <button data-go="all"><b>📊</b><span>All Event</span></button>
@@ -564,34 +564,43 @@ async function rest(path,opt={}){const r=await fetch(SB_URL+'/rest/v1/'+path,{..
 function go(id){document.querySelectorAll('.view').forEach(v=>v.classList.remove('on'));document.getElementById(id).classList.add('on');scrollTo(0,0);if(id==='lane')renderLanePage(window.currentLaneViewCat||'P12');if(id==='all')loadAllEvent();if(id==='rank')loadRankings();if(id==='ann')loadAnnouncements();if(id==='gal')loadGallery();if(id==='chat')loadChat();}
 document.addEventListener('click',e=>{const b=e.target.closest('[data-go]');if(b)go(b.dataset.go)});
 const schedule=[
-['29 OGOS • SABTU',[
-['🕙','10.00–1.30','Individu L15','6 game • MIBC'],
-['🕑','2.00–4.30','Individu L12','4 game • Mahkota Parade'],
-['🕝','2.30–6.00','Individu L18','6 game • MIBC']]],
-['30 OGOS • AHAD',[
-['🕙','10.00–1.30','Individu P15','6 game • MIBC'],
-['🕚','11.00–1.30','Individu P12','4 game • Mahkota Parade'],
-['🕝','2.30–6.00','Individu P18','6 game • MIBC']]],
-['31 OGOS • ISNIN',[
-['🕙','10.00–1.30','Beregu L15','6 game • MIBC'],
-['🕝','2.30–6.00','Beregu L18','6 game • MIBC'],
-['🇲🇾','Sepanjang hari','U12','Tiada permainan']]],
-['1 SEPT • SELASA',[
-['🕙','10.00–1.30','Beregu P15','6 game • MIBC'],
-['🕚','11.00–1.30','Beregu P12','4 game • Mahkota Parade'],
-['🕝','2.30–5.00','Beregu L12','4 game • Mahkota Parade'],
-['🕝','2.30–6.00','Beregu P18','6 game • MIBC']]],
-['2 SEPT • RABU',[
-['🏆','10.00–3.00','Master U15/U18','8 game • MIBC'],
-['🏆','11.00–3.00','Master U12','8 game • Mahkota Parade'],
-['🏆','4.00–5.00','Stepladder','Separuh Akhir & Akhir']]],
-['3 SEPT • KHAMIS',[
-['👥','10.00–12.00','Bakers L15/L18','6 game • MIBC'],
-['👥','11.00–12.00','Bakers U12','4 game • Mahkota Parade'],
-['👥','1.00–3.00','Bakers P15/P18','6 game • MIBC'],
-['🎉','Petang','Majlis Penutupan','Hotel Muzaffar']]]
+['JUMAAT • 28 OGOS 2026',[
+['🕡','6.30 pagi','Taklimat keselamatan & Bacaan Doa Selamat','Depan JPN Tunjong'],
+['🚌','7.00 pagi','Bertolak ke Melaka','JPN Tunjong'],
+['📋','4.00 petang','Taklimat Pengadil / Mesyuarat Pengurus Pasukan / Taklimat PTPS Negeri','Hotel Muzaffar'],
+['🏨','7.30 malam','Check-in','Hotel Riaz'],
+['📋','10.00 malam','Taklimat oleh PTPS, Pengurus & Jurulatih','Hotel Riaz'],
+['🌙','10.30 malam','Tidur','Hotel Riaz']]],
+['SABTU • 29 OGOS 2026',[
+['🍽️','7.00 pagi','Sarapan','Hotel Riaz'],['🚌','8.00 pagi','Bas ke MIBC • U15 & U18','MIBC'],
+['🎳','10.00 pagi','Perseorangan U15 & U18 bermula','MIBC'],['🚌','11.00 pagi','Bas ke Mahkota Parade • U12','Mahkota Parade'],
+['🎳','2.00 petang','Perseorangan U12 bermula','Mahkota Parade'],['🚌','5.30 petang','Bas U12 ke MIBC','MIBC'],
+['🍽️','7.00 malam','Makan malam / Balik ke penginapan','Hotel Riaz'],['📋','10.00 malam','Taklimat oleh PTPS, Pengurus & Jurulatih','Hotel Riaz'],['🌙','10.30 malam','Tidur','Hotel Riaz']]],
+['AHAD • 30 OGOS 2026',[
+['🍽️','7.00 pagi','Sarapan','Hotel Riaz'],['🚌','8.00 pagi','Bas ke MIBC • U15 & U18','MIBC'],['🚌','8.30 pagi','Bas ke Mahkota Parade • U12','Mahkota Parade'],
+['🎳','10.00 pagi','Perseorangan U15 & U18 bermula','MIBC'],['🎳','11.00 pagi','Perseorangan U12 bermula','Mahkota Parade'],['🚌','3.00 petang','Bas U12 ke MIBC','MIBC'],
+['🍽️','7.00 malam','Makan malam / Balik ke penginapan','Hotel Riaz'],['📋','10.00 malam','Taklimat oleh PTPS, Pengurus & Jurulatih','Hotel Riaz'],['🌙','10.30 malam','Tidur','Hotel Riaz']]],
+['ISNIN • 31 OGOS 2026',[
+['🍽️','7.00 pagi','Sarapan','Hotel Riaz'],['🚌','8.00 pagi','Bas ke MIBC • U15 & U18','MIBC'],['🎳','10.00 pagi','Beregu U15 & U18 bermula','MIBC'],
+['🍽️','7.00 malam','Makan malam / Balik ke penginapan','Hotel Riaz'],['📋','10.00 malam','Taklimat oleh PTPS, Pengurus & Jurulatih','Hotel Riaz'],['🌙','10.30 malam','Tidur','Hotel Riaz']]],
+['SELASA • 1 SEPTEMBER 2026',[
+['🍽️','7.00 pagi','Sarapan','Hotel Riaz'],['🚌','8.00 pagi','Bas ke MIBC • U15 & U18','MIBC'],['🚌','8.30 pagi','Bas ke Mahkota Parade • U12','Mahkota Parade'],
+['🎳','10.00 pagi','Beregu U15 & U18 bermula','MIBC'],['🎳','11.00 pagi','Beregu U12 bermula','Mahkota Parade'],['🚌','6.00 petang','Bas U12 ke MIBC','MIBC'],
+['🍽️','7.00 malam','Makan malam / Balik ke penginapan','Hotel Riaz'],['📋','10.00 malam','Taklimat oleh PTPS, Pengurus & Jurulatih','Hotel Riaz'],['🌙','10.30 malam','Tidur','Hotel Riaz']]],
+['RABU • 2 SEPTEMBER 2026',[
+['🍽️','7.00 pagi','Sarapan','Hotel Riaz'],['🚌','8.00 pagi','Bas ke MIBC • U15 & U18','MIBC'],['🚌','8.30 pagi','Bas ke Mahkota Parade • U12','Mahkota Parade'],
+['🏆','10.00 pagi','Masters U15 & U18 bermula','MIBC'],['🏆','11.00 pagi','Masters U12 bermula','Mahkota Parade'],['🚌','3.00 petang','Bas U12 ke MIBC','MIBC'],
+['🍽️','7.00 malam','Makan malam / Balik ke penginapan','Hotel Riaz'],['📋','10.00 malam','Taklimat oleh PTPS, Pengurus & Jurulatih','Hotel Riaz'],['🌙','10.30 malam','Tidur','Hotel Riaz']]],
+['KHAMIS • 3 SEPTEMBER 2026',[
+['🍽️','7.00 pagi','Sarapan','Hotel Riaz'],['🚌','8.00 pagi','Bas ke MIBC • U15 & U18','MIBC'],['🚌','8.30 pagi','Bas ke Mahkota Parade • U12','Mahkota Parade'],
+['👥','10.00 pagi','Berpasukan U15 & U18 bermula','MIBC'],['👥','11.00 pagi','Berpasukan U12 bermula','Mahkota Parade'],['🚌','1.30 tengah hari','Bas U12 ke MIBC','MIBC'],
+['🎉','3.30 petang','Majlis Penutup','Hotel Muzaffar'],['🏨','5.00 petang','Balik ke penginapan','Hotel Riaz'],['🍽️','7.30 malam','Makan malam','Hotel Riaz'],
+['📋','10.00 malam','Taklimat oleh PTPS, Pengurus & Jurulatih','Hotel Riaz'],['🌙','10.30 malam','Tidur','Hotel Riaz']]],
+['JUMAAT • 4 SEPTEMBER 2026',[
+['🚌','7.00 pagi','Bas bergerak balik ke Kelantan','Hotel Riaz'],['🍽️','9.00 pagi','Sarapan','Dalam perjalanan'],
+['🏁','7.00 malam','Jangkaan sampai di JPN Tunjong','Semua atlet dijemput keluarga masing-masing']]]
 ];
-function renderSchedule(){schList.innerHTML='<div class="notice">📍 U12: Mahkota Parade • U15/U18: MIBC • Penutupan: Hotel Muzaffar</div>'+schedule.map(d=>`<div class="day"><div class="dh">📅 ${d[0]}</div>${d[1].map(e=>`<div class="evrow"><div>${e[0]}</div><div><b>${e[2]}</b><br><small>⏰ ${e[1]}</small></div><span class="badge">${e[3]}</span></div>`).join('')}</div>`).join('')}
+function renderSchedule(){schList.innerHTML=`<div class="notice"><b>🎳 TENTATIF PROGRAM KEJOHANAN BOLING TENPIN MSSM 2026</b><br><small>📍 MIBC & Mahkota Parade<br>📅 29 Ogos – 3 September 2026<br>🚌 Bertolak: 28 Ogos 2026 • JPN Tunjong<br>🏨 Penginapan: Hotel Riaz, Ayer Keroh</small></div>`+schedule.map(d=>`<div class="day"><div class="dh">📅 ${d[0]}</div>${d[1].map(e=>`<div class="evrow"><div>${e[0]}</div><div><b>${e[2]}</b><br><small>⏰ ${e[1]}</small></div><span class="badge">${e[3]}</span></div>`).join('')}</div>`).join('')+`<div class="notice"><b>ℹ️ Catatan 2 September</b><br><small>Sekiranya tiada atlet yang layak ke acara Masters, atlet akan dibawa melawat tempat bersejarah di Bandar Hilir dan Mahkota Parade (Dataran Pahlawan) pada jam 10.00 pagi.</small></div>`}
 async function initData(){try{athletes=await rest('athletes?select=*&order=id');officers=await rest('officers?select=*&order=sort_order');renderOfficers();fillCats();renderAthletes('P12');scoreFillPlayers();loadAllEvent();renderLanePage('P12');}catch(e){console.error(e)}}function renderOfficers(){
 const seen=new Set();
 const clean=officers.filter(o=>{const k=(o.name||'').trim().toLowerCase();if(seen.has(k))return false;seen.add(k);return true});
