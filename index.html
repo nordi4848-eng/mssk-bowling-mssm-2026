@@ -723,9 +723,45 @@ const SBKEY='sb_publishable_TETZ8AdYYxjkU-ea_94P3A_iS9PD3cx';
 const RPC_HEADERS={'apikey':SBKEY,'Authorization':'Bearer '+SBKEY,'Content-Type':'application/json'};
 let selectedGroup='Penyelaras';
 
+function cookieDeviceToken(){
+ const m=document.cookie.match(/(?:^|;\s*)mssk_device_token=([^;]+)/);
+ return m?decodeURIComponent(m[1]):'';
+}
+function idbOpen(){
+ return new Promise((resolve,reject)=>{
+   try{
+     const req=indexedDB.open('mssk_bowling_identity',1);
+     req.onupgradeneeded=()=>{if(!req.result.objectStoreNames.contains('kv'))req.result.createObjectStore('kv');};
+     req.onsuccess=()=>resolve(req.result);
+     req.onerror=()=>reject(req.error);
+   }catch(e){reject(e);}
+ });
+}
+async function idbGetToken(){
+ try{const db=await idbOpen();return await new Promise((resolve)=>{const tx=db.transaction('kv','readonly');const r=tx.objectStore('kv').get('device_token');r.onsuccess=()=>resolve(r.result||'');r.onerror=()=>resolve('');});}catch(e){return '';}
+}
+async function idbSetToken(t){
+ try{const db=await idbOpen();await new Promise((resolve)=>{const tx=db.transaction('kv','readwrite');tx.objectStore('kv').put(t,'device_token');tx.oncomplete=resolve;tx.onerror=resolve;});}catch(e){}
+}
+function persistDeviceToken(t){
+ if(!t)return;
+ try{localStorage.setItem('mssk_device_token',t);}catch(e){}
+ try{document.cookie='mssk_device_token='+encodeURIComponent(t)+'; Max-Age=315360000; Path=/; SameSite=Lax; Secure';}catch(e){}
+ idbSetToken(t);
+}
+async function deviceTokenCandidates(){
+ const vals=[];
+ try{vals.push(localStorage.getItem('mssk_device_token')||'');}catch(e){}
+ vals.push(cookieDeviceToken());
+ vals.push(await idbGetToken());
+ return [...new Set(vals.filter(Boolean))];
+}
 function token(){
- let t=localStorage.getItem('mssk_device_token');
- if(!t){t=crypto.randomUUID();localStorage.setItem('mssk_device_token',t);}
+ let t='';
+ try{t=localStorage.getItem('mssk_device_token')||'';}catch(e){}
+ if(!t)t=cookieDeviceToken();
+ if(!t){t=crypto.randomUUID();}
+ persistDeviceToken(t);
  return t;
 }
 async function rpc(fn,body){
@@ -825,23 +861,36 @@ window.applyRolePermissions=function(){
  }
 };
 async function restore(){
- // Safari biasa dan PWA yang dipasang boleh mempunyai storan peranti berasingan pada iPhone.
- // Jangan paksa pendaftaran semula: pengguna sedia ada perlu membuka ikon aplikasi di Home Screen.
+ // V5.5: token peranti disimpan secara redundan (localStorage + cookie + IndexedDB).
+ // Semasa kemas kini, cuba semua token lama yang masih wujud sebelum mencipta identiti baharu.
  const standalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
- const t=localStorage.getItem('mssk_device_token');
- if(!t && !standalone){
+ let candidates=await deviceTokenCandidates();
+
+ // Cuba pulihkan sesi daripada mana-mana salinan token yang masih sah di server.
+ for(const t of candidates){
+   try{
+     const res=await rpc('get_app_identity',{p_device_token:t});
+     if(res?.ok){persistDeviceToken(t);activate(res);return;}
+   }catch(e){}
+ }
+
+ // Jika tiada token langsung, cipta satu dan simpan pada tiga storan.
+ let current=candidates[0]||token();
+ persistDeviceToken(current);
+
+ // Pemulihan satu-kali yang telah dipra-kebenarkan oleh Admin/server.
+ try{
+   const recovered=await rpc('recover_authorized_app_identity',{p_device_token:current});
+   if(recovered?.ok){persistDeviceToken(current);activate(recovered);return;}
+ }catch(e){}
+
+ if(!standalone){
    const st=document.getElementById('loginStatus');
    if(st){
-     st.innerHTML='📱 <b>Sudah pernah daftar?</b> Jika aplikasi telah dipasang, buka ikon MSSK Bowling dari Home Screen. Safari biasa dianggap sesi/peranti berasingan dan tidak perlu didaftarkan semula.';
+     st.innerHTML='📱 <b>Sudah pernah daftar?</b> Jika aplikasi telah dipasang, buka ikon MSSK Bowling dari Home Screen. Safari biasa boleh mempunyai storan berasingan.';
      st.style.color='#8a5a00';
    }
  }
-
- if(!t){renderGroup('Penyelaras');return;}
- try{
-   const res=await rpc('get_app_identity',{p_device_token:t});
-   if(res?.ok){activate(res);return;}
- }catch(e){}
  renderGroup('Penyelaras');
 }
 document.addEventListener('DOMContentLoaded',()=>{
