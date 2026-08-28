@@ -408,6 +408,8 @@ body{
     </div>
 
     <div id="loginStatus" class="login-status"></div>
+    <button id="deviceRecoveryBtn" class="login-register-btn hidden" type="button" style="margin-top:10px">Pulihkan akses telefon ini</button>
+    <div id="deviceRecoveryCode" class="login-help hidden" style="margin-top:10px;word-break:break-all"></div>
     <div class="login-access">
       <b>Akses:</b> Penyelaras / Pengerusi Teknik / Pengurus boleh isi lane & skor • Jurulatih boleh isi skor • Atlet / Parent / Umum lihat data & chat.
     </div>
@@ -743,7 +745,14 @@ async function claim(x){
  setStatus('Mendaftarkan telefon ini...');
  try{
    const res=await rpc('claim_app_identity',{p_identity_key:x.key,p_display_name:x.name,p_role:x.role,p_device_token:token()});
-   if(!res?.ok){setStatus(res?.message||'Nama ini tidak dapat didaftarkan.');return;}
+   if(!res?.ok){
+     setStatus(res?.message||'Nama ini tidak dapat didaftarkan.');
+     if(res?.code==='already_registered'){
+       const rb=document.getElementById('deviceRecoveryBtn');
+       if(rb){rb.dataset.identity=x.key;rb.dataset.name=x.name;rb.dataset.role=x.role;rb.classList.remove('hidden');}
+     }
+     return;
+   }
    activate(res);
  }catch(e){setStatus('Gagal mendaftar. Pastikan internet aktif.');}
 }
@@ -826,6 +835,12 @@ async function restore(){
 document.addEventListener('DOMContentLoaded',()=>{
  document.querySelectorAll('[data-reg-group]').forEach(b=>b.onclick=()=>renderGroup(b.dataset.regGroup));
  document.getElementById('registerGeneralBtn')?.addEventListener('click',claimGeneral);
+ document.getElementById('deviceRecoveryBtn')?.addEventListener('click',()=>{
+   const rb=document.getElementById('deviceRecoveryBtn');
+   const t=token();
+   const out=document.getElementById('deviceRecoveryCode');
+   if(out){out.innerHTML='<b>Kod pemulihan peranti:</b><br>'+escLogin(t)+'<br><small>Hantar kod ini kepada Admin untuk memindahkan pendaftaran ke telefon ini. Data pengguna lain tidak dipadam.</small>';out.classList.remove('hidden');}
+ });
  // Mutation observers keep permission state after athlete/score dynamic render.
  const obs=new MutationObserver(()=>applyRolePermissions());
  const ath=document.getElementById('athList'); if(ath)obs.observe(ath,{childList:true,subtree:true});
