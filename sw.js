@@ -1,4 +1,4 @@
-const CACHE_NAME = 'mssk-bowling-2026-v5-7-8';
+const CACHE_NAME = 'mssk-bowling-2026-v5-7-9';
 const CORE = ['./manifest.json','./icon-192.png','./icon-512.png','./icon-maskable-512.png'];
 
 self.addEventListener('install', event => {
