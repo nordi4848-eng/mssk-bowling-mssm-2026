@@ -394,6 +394,29 @@ body{
 @media(max-width:430px){.home-bottom-grid{left:3.5%;right:3.5%;gap:1%}.home-bottom-grid button{border-radius:13px}.home-bottom-grid .txt{font-size:10px}.home-tentatif-label{font-size:11px}}
 
 
+
+/* V5.7.12 — Home mobile cleanup: mask baked lower row/nav and rebuild clean buttons */
+.final-home-art::after{
+  content:"";position:absolute;z-index:5;left:0;right:0;top:76.6%;bottom:0;
+  background:linear-gradient(180deg,#082a70 0%,#061f5e 60%,#04194d 100%);
+  border-top:2px solid rgba(238,190,52,.72);pointer-events:none;
+}
+.home-bottom-grid{
+  z-index:8!important;left:3.6%!important;right:3.6%!important;top:78.4%!important;height:13.2%!important;
+  grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:1.2%!important;
+}
+.home-bottom-grid button{
+  min-width:0!important;border:2px solid #e8bd3a!important;border-radius:16px!important;
+  background:linear-gradient(145deg,#0a377f,#08245f)!important;box-shadow:0 5px 12px rgba(0,0,0,.30)!important;
+}
+.home-bottom-grid .ico{font-size:clamp(22px,5.2vw,42px)!important;margin-bottom:4px!important}
+.home-bottom-grid .txt{font-size:clamp(9px,2.05vw,16px)!important;line-height:1.05!important}
+@media(max-width:430px){
+ .home-bottom-grid{left:3.2%!important;right:3.2%!important;top:78.25%!important;height:13.4%!important;gap:1%!important}
+ .home-bottom-grid button{border-radius:12px!important;padding:3px 1px!important}
+ .home-bottom-grid .ico{font-size:26px!important}.home-bottom-grid .txt{font-size:10px!important}
+}
+
 /* V5.7.6 Quick Pin Analysis */
 .pin-choice-btn{grid-column:1/-1;background:linear-gradient(135deg,#174fbd,#0b2f78)!important;color:#fff!important;border:1px solid #5b8cff!important;font-weight:900!important}
 .pin-modal{position:fixed;inset:0;background:rgba(1,8,24,.78);z-index:99999;display:flex;align-items:center;justify-content:center;padding:18px}
@@ -428,6 +451,7 @@ body{
 .pin-hot[data-pin="4"]{left:30.4%;top:45.4%}.pin-hot[data-pin="5"]{left:50.3%;top:45.4%}.pin-hot[data-pin="6"]{left:70.2%;top:45.4%}
 .pin-hot[data-pin="2"]{left:40.3%;top:70.2%}.pin-hot[data-pin="3"]{left:60.2%;top:70.2%}.pin-hot[data-pin="1"]{left:50.3%;top:90.5%}
 @media(max-width:430px){.pin-hot{width:18%;height:28%}}
+/* build: V5.7.12 */
 </style>
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#063B98">
