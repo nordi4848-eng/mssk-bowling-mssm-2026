@@ -1269,6 +1269,7 @@ document.addEventListener('DOMContentLoaded',()=>{
 
 <script>document.addEventListener('click',e=>{const b=e.target.closest('[data-go="ann"]');if(b)setTimeout(()=>{syncAnnouncementPermission?.();loadAnnouncements?.()},80);});</script>
 
+<!-- Ranking patch 2026-09-03: L15/L18 G1-G6 + corrected empty/count state -->
 <script id="rankV6Script">
 (function(){
 const cfg=[
@@ -1291,8 +1292,8 @@ async function openStanding(age){
  let h='<tr><th>KED</th><th>'+(cur.event==='Berpasukan'?'NEGERI':'NAMA PESERTA / NEGERI')+'</th>';if(isAE){h+='<th>INDIVIDU</th><th>BEREGU</th><th>ALL EVENT</th><th>AVG</th>'}else{for(let i=1;i<=n;i++)h+=`<th>G${i}</th>`;h+='<th>JUMLAH</th><th>AVG</th>'}h+='</tr>';$('rankV6Thead').innerHTML=h;$('rankV6Tbody').innerHTML='<tr><td colspan="10" style="padding:28px">Memuat ranking rasmi…</td></tr>';pane('rankV6Stand');loadSource();
  try{
   let rows=await rest(`rankings?select=*&event=eq.${encodeURIComponent(cur.event)}&category=eq.${cat}&order=rank`);
-  if(!rows?.length){$('rankV6Tbody').innerHTML='<tr><td colspan="10" style="padding:28px;color:#70819b">Belum ada ranking rasmi untuk kategori ini.</td></tr>';return}
-  $('rankV6Tbody').innerHTML=rows.map(r=>{let gs=gamesOf(r,n),tot=totalOf(r,gs),avg=avgOf(r,tot,n),kel=isKelantan(r),rk=Number(r.rank||0),name=cur.event==='Berpasukan'?(r.state||r.athlete_name||''):(r.athlete_name||r.name||r.state||''),state=cur.event==='Berpasukan'?'':(r.state||r.negeri||''),med=rk===1?'m1':rk===2?'m2':rk===3?'m3':'mn';let cells='';if(isAE){let ae=Array.isArray(r.games)?r.games:[],ind=ae[0]??'',ber=ae[1]??'',avgAE=tot!==''?(Number(tot)/(n*2)).toFixed(1):'';cells=`<td>${ind===''?'—':ind}</td><td>${ber===''?'—':ber}</td><td><b>${tot===''?'—':tot}</b></td><td>${avgAE||'—'}</td>`}else{cells=`${gs.map(v=>`<td>${v===''?'—':v}</td>`).join('')}<td><b>${tot===''?'—':tot}</b></td><td>${avg||'—'}</td>`}return `<tr class="${kel?'rankv6-kel':''}"><td><span class="rankv7-medal ${med}">${rk||''}</span></td><td><b>${esc(name)}</b>${state?`<div class="rankv6-small ${kel?'rankv7-state-kel':''}">${esc(state)}</div>`:''}</td>${cells}</tr>`}).join('');$('rankV7Count').textContent=`Jumlah rekod: ${rows.length} atlet`;
+  if(!rows?.length){$('rankV6Tbody').innerHTML='<tr><td colspan="10" style="padding:28px;color:#70819b">Belum ada ranking rasmi untuk kategori ini.</td></tr>';$('rankV7Count').textContent='Jumlah rekod: 0';return}
+  $('rankV6Tbody').innerHTML=rows.map(r=>{let gs=gamesOf(r,n),tot=totalOf(r,gs),avg=avgOf(r,tot,n),kel=isKelantan(r),rk=Number(r.rank||0),name=cur.event==='Berpasukan'?(r.state||r.athlete_name||''):(r.athlete_name||r.name||r.state||''),state=cur.event==='Berpasukan'?'':(r.state||r.negeri||''),med=rk===1?'m1':rk===2?'m2':rk===3?'m3':'mn';let cells='';if(isAE){let ae=Array.isArray(r.games)?r.games:[],ind=ae[0]??'',ber=ae[1]??'',avgAE=tot!==''?(Number(tot)/(n*2)).toFixed(1):'';cells=`<td>${ind===''?'—':ind}</td><td>${ber===''?'—':ber}</td><td><b>${tot===''?'—':tot}</b></td><td>${avgAE||'—'}</td>`}else{cells=`${gs.map(v=>`<td>${v===''?'—':v}</td>`).join('')}<td><b>${tot===''?'—':tot}</b></td><td>${avg||'—'}</td>`}return `<tr class="${kel?'rankv6-kel':''}"><td><span class="rankv7-medal ${med}">${rk||''}</span></td><td><b>${esc(name)}</b>${state?`<div class="rankv6-small ${kel?'rankv7-state-kel':''}">${esc(state)}</div>`:''}</td>${cells}</tr>`}).join('');$('rankV7Count').textContent=`Jumlah rekod: ${rows.length} ${cur.event==='Beregu'?'pasangan':cur.event==='Berpasukan'?'pasukan':'atlet'}`;
  }catch(e){$('rankV6Tbody').innerHTML='<tr><td colspan="10" style="padding:28px;color:#9b3654">Gagal memuat ranking. Cuba semula.</td></tr>'}
 }
 function init(){
