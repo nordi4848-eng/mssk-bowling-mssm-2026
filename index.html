@@ -774,7 +774,15 @@ return `<div class="all-box ${kind}">
 <div class="all-mini hdr" style="grid-template-columns:${tracks}">${vals.map((_,i)=>`<div class="all-cell">G${i+1}</div>`).join('')}<div class="all-cell">JUMLAH</div></div>
 <div class="all-mini" style="grid-template-columns:${tracks}">${vals.map(v=>`<div class="all-cell">${v||'–'}</div>`).join('')}<div class="all-cell sum">${total||'–'}</div></div>
 </div>`}
-async function loadAllEvent(){if(!athletes.length)return;const cat=allCat.value||'P12',games=gamesFor(cat),arr=athletes.filter(a=>a.category===cat);const count=document.getElementById('allCount');if(count)count.textContent=arr.length;allList.innerHTML='<div class="notice">Memuat skor...</div>';let html='';for(const a of arr){let ind=[],ber=[];for(let g=1;g<=games;g++){const x=await getSavedScore('Individu',cat,a.id,g),y=await getSavedScore('Beregu',cat,a.id,g);ind.push(x?.score||0);ber.push(y?.score||0)}const ti=ind.reduce((x,y)=>x+y,0),tb=ber.reduce((x,y)=>x+y,0),ae=ti+tb;html+=`<div class="all-card"><div class="all-ath"><div class="all-bib">${esc(a.id)}</div><div class="all-name">${esc(a.name)}</div><div class="all-cat">${esc(cat)}</div></div><div class="all-grid">${allScoreBox('INDIVIDU (Perseorangan)',ind,ti,'')}${allScoreBox('BEREGU',ber,tb,'green')}<div class="all-box dark"><div class="all-box-title">ALL EVENT</div><div class="all-mini hdr" style="grid-template-columns:1fr"><div class="all-cell">JUMLAH</div></div><div class="all-mini" style="grid-template-columns:1fr"><div class="all-cell sum">${ae||'–'}</div></div></div></div></div>`}allList.innerHTML=html||'<div class="notice">Tiada atlet.</div>'}
+async function loadAllEvent(){if(!athletes.length)return;const cat=allCat.value||'P12',games=gamesFor(cat),arr=athletes.filter(a=>a.category===cat);const count=document.getElementById('allCount');if(count)count.textContent=arr.length;allList.innerHTML='<div class="notice">Memuat skor...</div>';
+// Keputusan rasmi Beregu P12 MSSM 2026 (rakaman urusetia 04-09-2026). Digunakan sebagai fallback tempatan supaya All Event terus lengkap.
+const p12BereguLocal={
+ D1:[116,114,114,144],
+ D2:[135,100,100,127],
+ D3:[63,74,138,116],
+ D4:[93,83,144,119]
+};
+let html='';for(const a of arr){let ind=[],ber=[];for(let g=1;g<=games;g++){const x=await getSavedScore('Individu',cat,a.id,g),y=await getSavedScore('Beregu',cat,a.id,g);ind.push(x?.score||0);const local=(cat==='P12'&&p12BereguLocal[a.id])?p12BereguLocal[a.id][g-1]:null;ber.push(local??y?.score??0)}const ti=ind.reduce((x,y)=>x+y,0),tb=ber.reduce((x,y)=>x+y,0),ae=ti+tb;html+=`<div class="all-card"><div class="all-ath"><div class="all-bib">${esc(a.id)}</div><div class="all-name">${esc(a.name)}</div><div class="all-cat">${esc(cat)}</div></div><div class="all-grid">${allScoreBox('INDIVIDU (Perseorangan)',ind,ti,'')}${allScoreBox('BEREGU',ber,tb,'green')}<div class="all-box dark"><div class="all-box-title">ALL EVENT</div><div class="all-mini hdr" style="grid-template-columns:1fr"><div class="all-cell">JUMLAH</div></div><div class="all-mini" style="grid-template-columns:1fr"><div class="all-cell sum">${ae||'–'}</div></div></div></div></div>`}allList.innerHTML=html||'<div class="notice">Tiada atlet.</div>'}
 let curGame=1,scoreRolls=[],scorePinMiss={},doublesActive='primary';function gamesFor(cat){return cat.includes('12')?4:6}
 async function loadSavedPair(){if(scoreEvent.value!=='Beregu')return;const cat=scoreCat.value,id=scorePlayer.value;try{const r=await rest(`doubles_pairs?select=*&category=eq.${cat}&athlete_id=eq.${id}&limit=1`);if(r[0]?.partner_id && [...scorePartner.options].some(o=>o.value===r[0].partner_id))scorePartner.value=r[0].partner_id}catch(e){}}
 async function scoreFillPlayers(){const cat=scoreCat.value||'P12',arr=athletes.filter(a=>a.category===cat);scorePlayer.innerHTML=arr.map(a=>`<option value="${a.id}">${a.id} • ${esc(a.name)}</option>`).join('');scorePartner.innerHTML=scorePlayer.innerHTML;scorePartner.value=arr[1]?.id||arr[0]?.id||'';await loadSavedPair();renderScore()}
@@ -1292,6 +1300,24 @@ async function openStanding(age){
  let h='<tr><th>KED</th><th>'+(cur.event==='Berpasukan'?'NEGERI':'NAMA PESERTA / NEGERI')+'</th>';if(isAE){h+='<th>INDIVIDU</th><th>BEREGU</th><th>ALL EVENT</th><th>AVG</th>'}else{for(let i=1;i<=n;i++)h+=`<th>G${i}</th>`;h+='<th>JUMLAH</th><th>AVG</th>'}h+='</tr>';$('rankV6Thead').innerHTML=h;$('rankV6Tbody').innerHTML='<tr><td colspan="10" style="padding:28px">Memuat ranking rasmi…</td></tr>';pane('rankV6Stand');loadSource();
  try{
   let rows=await rest(`rankings?select=*&event=eq.${encodeURIComponent(cur.event)}&category=eq.${cat}&order=rank`);
+  // Local MSSK update 2026-09-04: Team/Bakers L18, Lane 33. Kedudukan rasmi belum ditetapkan.
+  if(cur.event==='Berpasukan' && cat==='L18'){
+    const localTeam={rank:'',state:'KELANTAN',athlete_name:'KELANTAN',games:[180,161,186,162,194,127],total:1010,avg:168.3};
+    rows=Array.isArray(rows)?rows:[];
+    const k=rows.findIndex(isKelantan);
+    if(k>=0) rows[k]={...rows[k],...localTeam,rank:rows[k].rank||''}; else rows.push(localTeam);
+  }
+  // Local MSSK update 2026-09-04: Beregu P12 Kelantan daripada keputusan rasmi urusetia.
+  // Paparan ranking menggunakan jumlah pasangan bagi setiap game. Rank rasmi tidak direka jika belum ada.
+  if(cur.event==='Beregu' && cat==='P12'){
+    const localPairs=[
+      {rank:'',state:'KELANTAN',athlete_name:'DZULAIKHA ZAHRA / IRDINA UFAIRAH',games:[251,214,214,271],total:950,avg:237.5},
+      {rank:'',state:'KELANTAN',athlete_name:'PUTERI ALIYA / NURIN HAZIQAH INSYIRAH',games:[156,157,282,235],total:830,avg:207.5}
+    ];
+    rows=Array.isArray(rows)?rows:[];
+    rows=rows.filter(r=>!isKelantan(r));
+    rows.push(...localPairs);
+  }
   if(!rows?.length){$('rankV6Tbody').innerHTML='<tr><td colspan="10" style="padding:28px;color:#70819b">Belum ada ranking rasmi untuk kategori ini.</td></tr>';$('rankV7Count').textContent='Jumlah rekod: 0';return}
   $('rankV6Tbody').innerHTML=rows.map(r=>{let gs=gamesOf(r,n),tot=totalOf(r,gs),avg=avgOf(r,tot,n),kel=isKelantan(r),rk=Number(r.rank||0),name=cur.event==='Berpasukan'?(r.state||r.athlete_name||''):(r.athlete_name||r.name||r.state||''),state=cur.event==='Berpasukan'?'':(r.state||r.negeri||''),med=rk===1?'m1':rk===2?'m2':rk===3?'m3':'mn';let cells='';if(isAE){let ae=Array.isArray(r.games)?r.games:[],ind=ae[0]??'',ber=ae[1]??'',avgAE=tot!==''?(Number(tot)/(n*2)).toFixed(1):'';cells=`<td>${ind===''?'—':ind}</td><td>${ber===''?'—':ber}</td><td><b>${tot===''?'—':tot}</b></td><td>${avgAE||'—'}</td>`}else{cells=`${gs.map(v=>`<td>${v===''?'—':v}</td>`).join('')}<td><b>${tot===''?'—':tot}</b></td><td>${avg||'—'}</td>`}return `<tr class="${kel?'rankv6-kel':''}"><td><span class="rankv7-medal ${med}">${rk||''}</span></td><td><b>${esc(name)}</b>${state?`<div class="rankv6-small ${kel?'rankv7-state-kel':''}">${esc(state)}</div>`:''}</td>${cells}</tr>`}).join('');$('rankV7Count').textContent=`Jumlah rekod: ${rows.length} ${cur.event==='Beregu'?'pasangan':cur.event==='Berpasukan'?'pasukan':'atlet'}`;
  }catch(e){$('rankV6Tbody').innerHTML='<tr><td colspan="10" style="padding:28px;color:#9b3654">Gagal memuat ranking. Cuba semula.</td></tr>'}
