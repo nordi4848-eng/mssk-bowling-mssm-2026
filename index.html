@@ -1316,16 +1316,32 @@ async function openStanding(age){
     const k=rows.findIndex(isKelantan);
     if(k>=0) rows[k]={...rows[k],...localTeam,rank:rows[k].rank||''}; else rows.push(localTeam);
   }
-  // Local MSSK update 2026-09-04: Beregu P12 Kelantan daripada keputusan rasmi urusetia.
-  // Paparan ranking menggunakan jumlah pasangan bagi setiap game. Rank rasmi tidak direka jika belum ada.
+  // Local MSSK update 2026-09-04: Beregu P12 daripada rakaman keputusan rasmi urusetia.
+  // Semua pasangan yang dapat disahkan daripada rakaman dimasukkan secara lokal; Kelantan di-highlight emas.
   if(cur.event==='Beregu' && cat==='P12'){
-    const localPairs=[
-      {rank:'',state:'KELANTAN',athlete_name:'DZULAIKHA ZAHRA / IRDINA UFAIRAH',games:[251,214,214,271],total:950,avg:237.5},
-      {rank:'',state:'KELANTAN',athlete_name:'PUTERI ALIYA / NURIN HAZIQAH INSYIRAH',games:[156,157,282,235],total:830,avg:207.5}
+    const officialPairs=[
+      {state:'P. PINANG',athlete_name:'FAZIA AUNI HUMAIRA BINTI MOHAMAD FAIZAL / NUR DHIA ADRIANA BINTI ZULHUSMI ZUHAIR',games:[355,357,282,326],total:1320},
+      {state:'KEDAH',athlete_name:'FAKHIRA MAATHIRAH BINTI AHMAD FIRANIE / QHAIRUNNISA BINTI NOOR AZLI',games:[315,356,346,293],total:1310},
+      {state:'MELAKA',athlete_name:'NURUL QISYA KHALISHAH BINTI MOHD KHAIRUL / QASEH ZARIS NASUHA BINTI MOHD NASRUL RAHMAN',games:[344,287,317,291],total:1239},
+      {state:'JOHOR',athlete_name:'AIRISH PUTRI SOPHIA BINTI MOHAMAD HAFIZ / NUR ALIYA UMAIRAH BINTI MOHD AZAM',games:[331,262,369,271],total:1233},
+      {state:'SELANGOR',athlete_name:'NUR AIN BINTI ZAINOL AZMAN / WAN ZAFEERA RANIA BINTI WAN MOHD ARIFF',games:[295,334,285,319],total:1233},
+      {state:'PERAK',athlete_name:'NUR AINA ZULAIKHA BINTI KAMARUL ZAMAN / SOFWATUNNUR BINTI KHAIRUDIN',games:[293,252,305,303],total:1153},
+      {state:'MELAKA',athlete_name:'ADRYNA AQIRA BINTI AYMAN DANIEL / SOFEA BINTI SHAMSUL ARIFFIN',games:[267,316,311,257],total:1151},
+      {state:'N. SEMBILAN',athlete_name:'SITI AINUN MARDHIAH KIASATINA BINTI AHMAD AZLEE / NUR SYIFAA AMNI BINTI M SAYUTHI',games:[312,267,285,264],total:1128},
+      {state:'PAHANG',athlete_name:'NURUL AINUL MARDHIAH BINTI ABU SAMAH / NUR ZARA ELSYA BINTI MOHD HASRI',games:[291,268,285,280],total:1124},
+      {state:'P. PINANG',athlete_name:'ADELINA SYAFIQA BINTI ASHRUL ANUAR / NUR DANIA AMEERA BINTI MOHD EFFENDEE',games:[279,293,278,265],total:1115},
+      {state:'PERAK',athlete_name:'SYAZWANI BINTI MOHD RIZUAN / NUR IRDINA NADIAH BINTI MOHD FAIZAL',games:[254,324,278,256],total:1112},
+      {state:'PAHANG',athlete_name:'DHIA HAARRA AREESHA BINTI MOHD SUKRI / NUR KAMALIA FATIHAH BINTI MOHD SOHIDI',games:[241,300,283,270],total:1094},
+      {state:'N. SEMBILAN',athlete_name:'N03 BINTI MUHD ROSMADI / MIKAELA CLARISSA BINTI NORDYLAIDIN',games:[275,260,230,214],total:979},
+      {state:'KELANTAN',athlete_name:'DZULAIKHA ZAHRA / IRDINA UFAIRAH',games:[251,214,214,271],total:950},
+      {state:'WP PUTRAJAYA',athlete_name:'SAFIYA ZAHIRA BINTI SAFRI ZOHODAN / NURDAMYA AMANDA BINTI MOHD RIDZALHUDDIN',games:[260,211,185,265],total:921},
+      {state:'WP PUTRAJAYA',athlete_name:'DHIYA HUMAIRA / NUR IZZAH SYAQIREEN BINTI SAMHAN',games:[200,195,279,244],total:918},
+      {state:'PERLIS',athlete_name:'NUR AYRA HAZWANI BINTI HAZRAL / HANNA MARESSA BINTI SHAMSHURIZAT',games:[221,203,240,207],total:871},
+      {state:'KELANTAN',athlete_name:'PUTERI ALIYA / NURIN HAZIQAH INSYIRAH',games:[156,157,282,235],total:830},
+      {state:'SABAH',athlete_name:'INSYIRAH BINTI MOH NOR QAMAR / ALFIYAH BINTI MOHD FADZIL',games:[202,213,200,211],total:826}
     ];
-    rows=Array.isArray(rows)?rows:[];
-    rows=rows.filter(r=>!isKelantan(r));
-    rows.push(...localPairs);
+    officialPairs.sort((a,b)=>b.total-a.total).forEach((r,i)=>{r.rank=i+1;r.avg=(r.total/4).toFixed(1)});
+    rows=officialPairs;
   }
   if(!rows?.length){$('rankV6Tbody').innerHTML='<tr><td colspan="10" style="padding:28px;color:#70819b">Belum ada ranking rasmi untuk kategori ini.</td></tr>';$('rankV7Count').textContent='Jumlah rekod: 0';return}
   // Paparkan SEMUA rekod setiap negeri. Untuk acara Beregu, kedua-dua nama atlet dipaparkan berasingan dalam pasangan yang sama.
